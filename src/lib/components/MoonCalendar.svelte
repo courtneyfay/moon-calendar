@@ -1,19 +1,21 @@
 <script lang="ts">
+    import { yesterday, today, tomorrow, previousNewMoon, nextNewMoon, formatDate } from '$lib/data/dates'
+
     export let id: number;
-    let date: Date = new Date();
+    
 </script>
 
-<p>Current View: { id }</p>
-
 {#if id === 1}
-    <p>Show one moon</p>
-    <p>Date: { date }</p>
+    <p>Current moon - { formatDate(today) }</p>
 {:else if id === 2}
-    <p>Show yesterday, today and tomorrow moons</p>
+    <p>Yesterday, today, and tomorrow moons</p>
+    <p>{ formatDate(yesterday) } | { formatDate(today) } | { formatDate(tomorrow) }</p>
 {:else if id === 3}
     <p>Show from either the closest full moon to new moon, or the closest new moon to full moon</p>
 {:else if id === 4}
-    <p>Show from most recent new moon to next new moon</p>
+    <p>Previous new moon - { formatDate(previousNewMoon) }</p>
+    <p>all the dates in between!</p>
+    <p>Next new moon - { formatDate(nextNewMoon) }</p>
 {:else if id === 5}
     <p>Show from most recent full moon to next full moon</p>
 {:else if id === 6}
