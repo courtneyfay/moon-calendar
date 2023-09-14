@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 
 // TODO: is there an api that'll give me this info for free?
 export const newMoons = [
+    // TODO: would be nice to have some way of know more data about each moon:
+    // e.g. full or new, star sign, etc.
     DateTime.local(2023, 8, 16, 5, 37), // 23°16 Leo - August 16th, 2023, at 5:37 am EST
     DateTime.local(2023, 9, 14, 21, 39), // 21°58 Virgo - September 14th, 2023, at 9:39 pm EST
     DateTime.local(2023, 11, 13, 4, 27), // 20°43 Scorpio - November 13th, 2023, at 4:27 am EST
