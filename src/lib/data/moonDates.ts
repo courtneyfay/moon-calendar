@@ -9,8 +9,8 @@ export const newMoons = [
 ]
 
 export const fullMoons = [
-    // Full Moon 7°24 Pisces - August 30th, 2023, at 9:35 pm EST
-    // Full Moon 6°00 Aries - September 29th, 2023, at 5:57 am EST
-    // Full Moon 4°51 Gemini - November 27th, 2023, at 4:16 am EST
-    // Full Moon 4°57 Cancer - December 26th, 2023, at 7:32 pm EST
+    DateTime.local(2023, 8, 30, 21, 35), // 7°24 Pisces - August 30th, 2023, at 9:35 pm EST
+    DateTime.local(2023, 9, 29, 5, 57), // 6°00 Aries - September 29th, 2023, at 5:57 am EST
+    DateTime.local(2023, 11, 27, 4, 16), // 4°51 Gemini - November 27th, 2023, at 4:16 am EST
+    DateTime.local(2023, 12, 26, 19, 32), // 4°57 Cancer - December 26th, 2023, at 7:32 pm EST
 ]

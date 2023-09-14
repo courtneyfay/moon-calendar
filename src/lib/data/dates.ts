@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { newMoons } from './moonDates'
+import { newMoons, fullMoons } from './moonDates'
 
 export const formatDate = (date: DateTime) => {
     return date.toFormat('MMMM dd, yyyy')
@@ -9,19 +9,22 @@ export const today: DateTime = DateTime.now()
 export const tomorrow: DateTime = DateTime.now().plus({days: 1})
 export const yesterday: DateTime = DateTime.now().minus({days: 1})
 
-const calculateNextNewMoon = () => {
+const calculateNextAndPrevious = (moonArray: DateTime[]) => {
+    // TODO: figure out a better default value than this \/\/
+    const defaultValue = moonArray[1]
     // find first new moon that is greater than current datetime
-    return newMoons.find(moon => moon > today) || newMoons[0]
-    // TODO: figure out a better default value than newMoons[0]
-}
+    const nextMoon = moonArray.find(moon => moon > today) || defaultValue
 
-export const nextNewMoon: DateTime = calculateNextNewMoon()
-
-const calculatePreviousNewMoon = () => {
     // find index of next new moon
-    const index = newMoons.indexOf(nextNewMoon)
+    const index = moonArray.indexOf(nextMoon)
     // then use the new moon right before that
-    return newMoons[index - 1]
+    const previousMoon = moonArray[index - 1]
+
+    return {
+        previous: previousMoon,
+        next: nextMoon,
+    }
 }
 
-export const previousNewMoon: DateTime = calculatePreviousNewMoon()
+export const newMoon = calculateNextAndPrevious(newMoons)
+export const fullMoon = calculateNextAndPrevious(fullMoons)
