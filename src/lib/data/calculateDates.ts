@@ -19,10 +19,12 @@ const calcPreviousMoon = (moonArray: DateTime[], nextMoon: DateTime) => {
 const calcIntervalDates = (previousMoon: DateTime, nextMoon: DateTime) => {
     const previousMoonPlusOne = previousMoon.startOf('day').plus({ days: 1 })
     const nextMoonMinusOne = nextMoon.endOf('day').minus({ days: 1 })
+    // TODO: figure out a better default value than this \/\/
+    const defaultValue = DateTime.now()
 
     return Interval.fromDateTimes(previousMoonPlusOne, nextMoonMinusOne)
         .splitBy({ day: 1 })
-        .map(d => d.start)
+        .map(d => d.start || defaultValue)
 }
 
 export const calculateDates = (moonArray: DateTime[]) => {

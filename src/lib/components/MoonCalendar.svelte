@@ -19,8 +19,6 @@
 {:else if id === 2}
     <p>Yesterday, today, and tomorrow moons</p>
     <p>{ formatDate(yesterday) } | { formatDate(today) } | { formatDate(tomorrow) }</p>
-
-<!-- 🚧 IN PROGRESS -->
 {:else if id === 3}
     <p>Show from either the closest full moon to new moon, or the closest new moon to full moon</p>
     <p>Previous moon - { formatDate(halfMoon.previous) }</p>
@@ -28,14 +26,12 @@
         <p>{formatDate(halfMoonDate)}</p>
     {/each}
     <p>Next moon - { formatDate(halfMoon.next) }</p>
-<!-- 🚧 IN PROGRESS -->
 {:else if id === 4}
     <p>Previous new moon - { formatDate(newMoon.previous) }</p>
     {#each newMoon.interval as newMoonDate}
         <p>{formatDate(newMoonDate)}</p>
     {/each}
     <p>Next new moon - { formatDate(newMoon.next) }</p>
-<!-- 🚧 IN PROGRESS -->
 {:else if id === 5}
     <p>Previous full moon - { formatDate(fullMoon.previous) }</p>
     {#each fullMoon.interval as fullMoonDate}
