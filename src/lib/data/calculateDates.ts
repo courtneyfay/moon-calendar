@@ -17,10 +17,12 @@ const calcPreviousMoon = (moonArray: DateTime[], nextMoon: DateTime) => {
 }
 
 const calcIntervalDates = (previousMoon: DateTime, nextMoon: DateTime) => {
-    const previousMoonPlusOne = previousMoon.plus({ days: 1 })
-    const nextMoonMinusOne = nextMoon.minus({ days: 1 })
-    // TODO: fix bug on dates for full moon (as of sept 14) where Sept 28 is missing from the interval?
-    return Interval.fromDateTimes(previousMoonPlusOne, nextMoonMinusOne).splitBy({ day: 1 }).map(d => d.start)
+    const previousMoonPlusOne = previousMoon.startOf('day').plus({ days: 1 })
+    const nextMoonMinusOne = nextMoon.endOf('day').minus({ days: 1 })
+
+    return Interval.fromDateTimes(previousMoonPlusOne, nextMoonMinusOne)
+        .splitBy({ day: 1 })
+        .map(d => d.start)
 }
 
 export const calculateDates = (moonArray: DateTime[]) => {
