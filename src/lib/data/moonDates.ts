@@ -14,3 +14,5 @@ export const fullMoons = [
     DateTime.local(2023, 11, 27, 4, 16), // 4°51 Gemini - November 27th, 2023, at 4:16 am EST
     DateTime.local(2023, 12, 26, 19, 32), // 4°57 Cancer - December 26th, 2023, at 7:32 pm EST
 ]
+
+export const allMoons = [...newMoons, ...fullMoons].sort((a, b) => a.toMillis() - b.toMillis())

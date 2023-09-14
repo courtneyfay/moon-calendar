@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { newMoons, fullMoons } from './moonDates'
+import { newMoons, fullMoons, allMoons } from './moonDates'
 
 export const formatDate = (date: DateTime) => {
     return date.toFormat('MMMM dd, yyyy')
@@ -28,3 +28,4 @@ const calculateNextAndPrevious = (moonArray: DateTime[]) => {
 
 export const newMoon = calculateNextAndPrevious(newMoons)
 export const fullMoon = calculateNextAndPrevious(fullMoons)
+export const halfMoon = calculateNextAndPrevious(allMoons)
