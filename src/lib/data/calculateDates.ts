@@ -1,7 +1,7 @@
 import { DateTime, Interval } from 'luxon'
 import { today } from './dates'
 
-const calcNextMoon = (moonArray: DateTime[]) => {
+const calcNextDate = (moonArray: DateTime[]) => {
     // TODO: figure out a better default value than this \/\/
     const defaultValue = moonArray[1]
 
@@ -9,7 +9,7 @@ const calcNextMoon = (moonArray: DateTime[]) => {
     return moonArray.find(moon => moon > today) || defaultValue
 }
 
-const calcPreviousMoon = (moonArray: DateTime[], nextMoon: DateTime) => {
+const calcPreviousDate = (moonArray: DateTime[], nextMoon: DateTime) => {
     // find index of next new moon
     const index = moonArray.indexOf(nextMoon)
     // then use the new moon right before that
@@ -28,13 +28,13 @@ const calcIntervalDates = (previousMoon: DateTime, nextMoon: DateTime) => {
 }
 
 export const calculateDates = (moonArray: DateTime[]) => {
-    const nextMoon = calcNextMoon(moonArray)
-    const previousMoon = calcPreviousMoon(moonArray, nextMoon)
-    const intervalDates = calcIntervalDates(previousMoon, nextMoon)
+    const nextDate = calcNextDate(moonArray)
+    const previousDate = calcPreviousDate(moonArray, nextDate)
+    const intervalDates = calcIntervalDates(previousDate, nextDate)
 
     return {
-        previous: previousMoon,
-        next: nextMoon,
+        previous: previousDate,
+        next: nextDate,
         interval: intervalDates,
     }
 }

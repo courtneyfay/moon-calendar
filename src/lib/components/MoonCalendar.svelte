@@ -6,6 +6,7 @@
         fullMoon,
         halfMoon,
         newMoon,
+        astrologySigns,
         formatDate,
     } from '$lib/data/dates'
 
@@ -38,10 +39,14 @@
         <p>{formatDate(fullMoonDate)}</p>
     {/each}
     <p>Next full moon - { formatDate(fullMoon.next) }</p>
-
-<!-- ⛔️ NOT STARTED -->
 {:else if id === 6}
     <p>Show from most recent astrological sign change to next astrological sign change</p>
+    <p>Previous astrology sign start date - { formatDate(astrologySigns.previous) }</p>
+    {#each astrologySigns.interval as astrologySignDate}
+        <p>{formatDate(astrologySignDate)}</p>
+    {/each}
+    <p>Next astrology sign start date - { formatDate(astrologySigns.next) }</p>
+
 <!-- ⛔️ NOT STARTED -->
 {:else if id === 7}
     <p>Show from most recent season beginning (equinox or solstice) to next season equinox/solstice</p>
