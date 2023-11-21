@@ -13,19 +13,10 @@
 
     export let id: number;
     
-</script>
-
-<!-- TODO: create 1 moon template -->
-{#if id === 1}   
-    <p>Current moon - { formatDate(today) }</p>
-
-<!-- TODO: create 3 moons template -->
-{:else if id === 2}
-    <p>Yesterday, today, and tomorrow moons</p>
-    <p>{ formatDate(yesterday) } | { formatDate(today) } | { formatDate(tomorrow) }</p>
+</script>     
 
 <!-- TODO: create half moon template -->
-{:else if id === 3}
+{#if id === 3}
     <p>Show from either the closest full moon to new moon, or the closest new moon to full moon</p>
     <p>Previous moon - { formatDate(halfMoon.previous) }</p>
     {#each halfMoon.interval as halfMoonDate}
@@ -60,7 +51,4 @@
         <p>{formatDate(seasonDate)}</p>
     {/each}
     <p>Next season start date - { formatDate(seasons.next) }</p>
-
-{:else}
-    <p>what did you select?</p>
 {/if}

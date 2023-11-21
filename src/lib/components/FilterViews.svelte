@@ -1,20 +1,19 @@
 <script lang="ts">
     import { views } from '$lib/data/views'
-    export let selectedId: number;
 </script>
 
 <div>
-    <select class="dropdown" bind:value={selectedId}>
-		{#each views as view}
-			<option value={view.id}>
-				{view.name}
-			</option>
-		{/each}
-	</select>
+	{#each views as view}
+		<button class="button">
+			<a href={ `/${ view.slug }` } class="button-text">
+				{ view.name }
+			</a>
+		</button>
+	{/each}
 </div>
 
 <style>
-	.dropdown {
+	.button {
 		/* font */
 		font-family: 'Merriweather', serif;
 		color: #685044;

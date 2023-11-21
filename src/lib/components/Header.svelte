@@ -1,6 +1,5 @@
 <script lang="ts">
     import FilterViews from '$lib/components/FilterViews.svelte'
-    let id = 1;
 </script>
 
 <div class="navigation">
@@ -9,7 +8,7 @@
         <h1>Moon Calendar</h1>
     </div>
 
-    <FilterViews bind:selectedId={ id } />
+    <FilterViews  />
 </div>
 
 <style>
