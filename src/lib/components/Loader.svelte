@@ -1,10 +1,11 @@
 <script>
-    import quotes from '$lib/data/quotes'
+    import { quotes } from '$lib/data/quotes'
+	import { chooseRandom } from '$lib/helpers/chooseRandom';
 </script>
 
 <div class="wrapper">
     <div class="circle pulse"></div>
-    <p class="quote">Quote here</p>
+    <p class="quote">{chooseRandom(quotes)}</p>
 </div>
 
 <style>

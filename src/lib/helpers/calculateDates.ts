@@ -1,5 +1,5 @@
 import { DateTime, Interval } from 'luxon'
-import { today } from './dates'
+import { today } from '../data/dates'
 
 const calcNextDate = (moonArray: DateTime[]) => {
     // TODO: figure out a better default value than this \/\/
