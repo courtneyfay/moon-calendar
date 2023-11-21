@@ -1,14 +1,16 @@
 <script lang="ts">
-    import FilterViews from '$lib/components/FilterViews.svelte'
+    import ViewButtons from '$lib/components/ViewButtons.svelte'
 </script>
 
 <div class="navigation">
     <div class="header">
         <img class="logo" src="/moon-icon.png" alt="new moon phase"/>
-        <h1>Moon Calendar</h1>
+        <a href="/">
+            <h1>Moon Calendar</h1>
+        </a>
     </div>
 
-    <FilterViews  />
+    <ViewButtons  />
 </div>
 
 <style>
@@ -21,6 +23,11 @@
         /* font */
         color: white;
         background-color: #4E0250;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
     }
 
     .header {
