@@ -1,10 +1,12 @@
 <script>
     import Header from '$lib/components/Header.svelte'
+
+    // add css styles to entire project
+    import '$lib/styles/global.css'
 </script>
 
-<Header />
-
 <main class="page">
+    <Header />
     <slot />
 </main>
 
@@ -12,7 +14,7 @@
     .page {
         /* styles */
         background-color: #CFBFF7;
-        height: 88vh;
+        height: 100vh;
 
         /* font */
         color: #685044;
