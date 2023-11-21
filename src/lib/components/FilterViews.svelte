@@ -4,8 +4,7 @@
 </script>
 
 <div>
-    <p>Filter buttons:</p>
-    <select bind:value={selectedId}>
+    <select class="dropdown" bind:value={selectedId}>
 		{#each views as view}
 			<option value={view.id}>
 				{view.name}
@@ -13,3 +12,17 @@
 		{/each}
 	</select>
 </div>
+
+<style>
+	.dropdown {
+		/* font */
+		font-family: 'Merriweather', serif;
+		color: #685044;
+
+		/* styles */
+		background-color: white;
+		padding: 10px;
+		border: none;
+		border-radius: 5px;
+	}
+</style>
