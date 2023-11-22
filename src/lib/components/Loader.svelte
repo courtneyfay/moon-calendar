@@ -3,6 +3,26 @@
 	import { chooseRandom } from '$lib/helpers/chooseRandom';
 </script>
 
+<script context="module">
+    import { readable } from 'svelte/store'
+    let countFrom = 0
+    let counter = 18 //total time for 3 6-second long bubble breaths to show
+    export const timeRemaining = readable(countFrom, function start(set) {
+        const interval = setInterval(() => {
+			counter = counter - 1
+            console.log('time left', counter)
+            set(counter)
+			if (counter <= 0) {
+				clearInterval(interval);
+			}
+		}, 1000);
+
+        return function stop() {
+            clearInterval(interval);
+        };
+    });
+</script>
+
 <div class="wrapper">
     <div class="circle pulse"></div>
     <p class="quote">{chooseRandom(quotes)}</p>

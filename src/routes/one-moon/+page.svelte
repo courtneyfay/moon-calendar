@@ -1,11 +1,16 @@
 <script lang="ts">
+    import Loader, { timeRemaining } from '$lib/components/Loader.svelte'
     import {
         today,
         formatDate,
-    } from '$lib/data/dates'    
+    } from '$lib/data/dates'
 </script>
 
-<p>Current moon - { formatDate(today) }</p>
+{#if $timeRemaining !== 0}
+    <Loader />
+{:else}
+    <p>Current moon - { formatDate(today) }</p>
+{/if}
 
 <style>
 </style>
