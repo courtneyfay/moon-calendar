@@ -1,16 +1,16 @@
 <script lang="ts">
-    import Loader, { timeRemaining } from '$lib/components/Loader.svelte'
+    import Loader, { wait } from '$lib/components/Loader.svelte'
     import {
         today,
         formatDate,
     } from '$lib/data/dates'
 </script>
 
-{#if $timeRemaining !== 0}
+{#await wait()}
     <Loader />
-{:else}
+{:then}
     <p>Current moon - { formatDate(today) }</p>
-{/if}
+{/await}
 
 <style>
 </style>

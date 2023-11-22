@@ -1,26 +1,11 @@
-<script>
-    import { quotes } from '$lib/data/quotes'
-	import { chooseRandom } from '$lib/helpers/chooseRandom';
+<script context="module">
+    export const wait = () => new Promise((res) => setTimeout(res, 17000))
+    // 17 sec is about how long 3 6-second long bubble breaths takes
 </script>
 
-<script context="module">
-    import { readable } from 'svelte/store'
-    let countFrom = 0
-    let counter = 18 //total time for 3 6-second long bubble breaths to show
-    export const timeRemaining = readable(countFrom, function start(set) {
-        const interval = setInterval(() => {
-			counter = counter - 1
-            console.log('time left', counter)
-            set(counter)
-			if (counter <= 0) {
-				clearInterval(interval);
-			}
-		}, 1000);
-
-        return function stop() {
-            clearInterval(interval);
-        };
-    });
+<script>
+    import { quotes } from '$lib/data/quotes'
+	import { chooseRandom } from '$lib/helpers/chooseRandom'
 </script>
 
 <div class="wrapper">
