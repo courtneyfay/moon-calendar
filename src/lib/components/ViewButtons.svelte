@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores'
     import { views } from '$lib/data/views'
 </script>
 
 <nav>
 	{#each views as view}
-		<a href={ `/${ view.slug }` }>
+		<a href={ `/${ view.slug }` } class:active={ $page.url.pathname.includes(view.slug) }>
 			{ view.name }
 		</a>
 	{/each}
@@ -29,8 +30,8 @@
 		color: white;
 		background-color: #801A86;
 	}
-	
-	a:focus {
+
+	a.active {
 		color: white;
 		background-color: #801A86;
 	}
