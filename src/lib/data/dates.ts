@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { calculateDates } from './calculateDates'
+import { calculateDates } from '../helpers/calculateDates'
 import { newMoons, fullMoons, allMoons } from './moonDates'
 import { astrologyDates } from './astrologyDates'
 import { seasonalDates } from './seasonalDates'

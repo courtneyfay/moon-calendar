@@ -1,30 +1,30 @@
 export const views = [
     { 
-        id: 1,
         name: 'One Moon',
+        slug: 'one-moon',
     },
     {
-        id: 2,
         name: 'A Few Moons',
+        slug: 'a-few-moons',
     },
     { 
-        id: 3,
         name: 'Half Moon',
+        slug: 'half-moon',
     },
     { 
-        id: 4,
         name: 'New Moon',
+        slug: 'new-moon',
     },
     { 
-        id: 5,
         name: 'Full Moon',
+        slug: 'full-moon',
     },
     { 
-        id: 6,
         name: 'Astrological Sign',
+        slug: 'astrological-sign',
     },
     { 
-        id: 7,
         name: 'Season',
+        slug: 'season',
     },
 ]
