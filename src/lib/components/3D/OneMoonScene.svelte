@@ -1,11 +1,17 @@
 <script>
-  import { T } from '@threlte/core'
+  import { T, useTask } from '@threlte/core'
   import { interactivity } from '@threlte/extras'
   import { spring } from 'svelte/motion'
 
-  // makes interactivity possible
+  // interactivity
   interactivity()
   const scale = spring(1)
+
+  // animation
+  let rotation = 0
+  useTask((delta) => {
+    rotation += delta
+  })
 </script>
   
 <!-- Adding perspective camera -->
@@ -19,7 +25,8 @@
 
 <!-- Long 2D pink rectangle -->
 <T.Mesh
-  position.y={1}
+  rotation.y={rotation}
+  position.y={1} 
   scale={$scale}
   on:pointerenter={() => scale.set(1.5)}
   on:pointerleave={() => scale.set(1)}
