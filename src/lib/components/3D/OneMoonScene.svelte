@@ -23,6 +23,9 @@
   }}
 />
 
+<!-- Adds lighting -->
+<T.DirectionalLight position={[0, 10, 10]}/>
+
 <!-- Long 2D pink rectangle -->
 <T.Mesh
   rotation.y={rotation}
@@ -32,5 +35,5 @@
   on:pointerleave={() => scale.set(1)}
 >
   <T.BoxGeometry args={[1, 2, 1]} />
-  <T.MeshBasicMaterial color="hotpink" />
+  <T.MeshStandardMaterial color="hotpink" />
 </T.Mesh>
