@@ -1,3 +1,8 @@
+export type TView = {
+    name: string
+    slug: string
+}
+
 export const views = [
     { 
         name: 'One Moon',
