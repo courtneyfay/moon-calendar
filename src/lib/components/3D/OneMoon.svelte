@@ -12,17 +12,20 @@
 <!-- Adding perspective camera -->
 <T.PerspectiveCamera
   makeDefault
-  position={[2, 2, 10]}
+  position={[5, 5, 6]}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, 0)
   }}
 >
-  <!-- Allows user to interact with objects -->
+  <!-- Allows user to interact with toroid -->
   <OrbitControls
     enableDamping
+    dampingFactor={0.01}
     enableZoom={false}
     enablePan={false}
     rotateSpeed={0.25}
+    minPolarAngle={Math.PI/3}
+    maxPolarAngle={Math.PI/3}
   />
 </T.PerspectiveCamera>
 
@@ -36,11 +39,11 @@
 <!-- One Moon toroid -->
 <T.Mesh
   position.y={1.75}
-  rotation.x={360}
+  rotation.x={Math.PI/2}
   castShadow
 >
   <T.TorusGeometry
     args={[4, 1.15, 24, 24]}
   />
-  <T.MeshNormalMaterial color="#ADB993" />
+  <T.MeshStandardMaterial color="#ADB993" />
 </T.Mesh>

@@ -14,6 +14,7 @@
     .page {
         /* styles */
         background-color: #CFBFF7;
+        height: 100vh;
 
         /* font */
         color: #685044;

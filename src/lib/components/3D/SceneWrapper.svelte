@@ -12,6 +12,7 @@
 <style>
     .wrapper {
         position: relative;
+        background-color: #CFBFF7;
         height: 100vh;
         width: 100vw;
     }
