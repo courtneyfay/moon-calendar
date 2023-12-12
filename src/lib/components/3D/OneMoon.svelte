@@ -17,9 +17,9 @@
 <!-- Adding perspective camera -->
 <T.PerspectiveCamera
   makeDefault
-  position={[10, 10, 10]}
+  position={[2, 2, 10]}
   on:create={({ ref }) => {
-    ref.lookAt(0, 1, 0)
+    ref.lookAt(0, 0, 0)
   }}
 />
 
@@ -29,23 +29,17 @@
   castShadow
 />
 
-<!-- Long 2D pink rectangle -->
+<!-- One Moon toroid -->
 <T.Mesh
-  rotation.y={rotation}
-  position.y={1}
-  scale={$scale}
+  position.y={1.75}
+  rotation.x={360}
   castShadow
+  scale={$scale}
   on:pointerenter={() => scale.set(1.5)}
   on:pointerleave={() => scale.set(1)}
 >
-  <T.BoxGeometry args={[1, 2, 1]} />
-  <T.MeshStandardMaterial color="hotpink" />
-</T.Mesh>
-
-<T.Mesh
-  rotation.x={-Math.PI / 2}
-  receiveShadow
->
-  <T.CircleGeometry args={[4, 40]} />
-  <T.MeshStandardMaterial color="white" />
+  <T.TorusGeometry
+    args={[4, 1.15, 24, 24]}
+  />
+  <T.MeshStandardMaterial color="#ADB993" />
 </T.Mesh>

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import DemoScene from '$lib/components/3D/SceneWrapper.svelte'
     import Loader, { wait } from '$lib/components/Loader.svelte'
     import {
         today,
@@ -6,11 +7,12 @@
     } from '$lib/data/dates'
 </script>
 
-{#await wait()}
+<!-- {#await wait()}
     <Loader />
-{:then}
+{:then} -->
     <p>Current moon - { formatDate(today) }</p>
-{/await}
+    <DemoScene />
+<!-- {/await} -->
 
 <style>
 </style>
