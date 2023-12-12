@@ -1,11 +1,6 @@
 <script>
   import { T, useTask } from '@threlte/core'
-  import { interactivity } from '@threlte/extras'
-  import { spring } from 'svelte/motion'
-
-  // interactivity
-  interactivity()
-  const scale = spring(1)
+  import { OrbitControls } from '@threlte/extras'
 
   // animation
   let rotation = 0
@@ -21,25 +16,31 @@
   on:create={({ ref }) => {
     ref.lookAt(0, 0, 0)
   }}
-/>
+>
+  <!-- Allows user to interact with objects -->
+  <OrbitControls
+    enableDamping
+    enableZoom={false}
+    enablePan={false}
+    rotateSpeed={0.25}
+  />
+</T.PerspectiveCamera>
 
 <!-- Adds lighting and shadows -->
 <T.DirectionalLight
   position={[0, 10, 10]}
   castShadow
 />
+<T.AmbientLight />
 
 <!-- One Moon toroid -->
 <T.Mesh
   position.y={1.75}
   rotation.x={360}
   castShadow
-  scale={$scale}
-  on:pointerenter={() => scale.set(1.5)}
-  on:pointerleave={() => scale.set(1)}
 >
   <T.TorusGeometry
     args={[4, 1.15, 24, 24]}
   />
-  <T.MeshStandardMaterial color="#ADB993" />
+  <T.MeshNormalMaterial color="#ADB993" />
 </T.Mesh>
