@@ -3,6 +3,16 @@
     import Scene from './OneMoon.svelte'
 </script>
 
-<Canvas>
-    <Scene />
-</Canvas>
+<div class="wrapper">
+    <Canvas >
+        <Scene />
+    </Canvas>
+</div>
+
+<style>
+    .wrapper {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+    }
+</style>
