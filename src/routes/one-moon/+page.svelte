@@ -7,12 +7,12 @@
     } from '$lib/data/dates'
 </script>
 
-<!-- {#await wait()}
+{#await wait()}
     <Loader />
-{:then} -->
+{:then}
     <p>Current moon - { formatDate(today) }</p>
     <SceneWrapper />
-<!-- {/await} -->
+{/await}
 
 <style>
 </style>

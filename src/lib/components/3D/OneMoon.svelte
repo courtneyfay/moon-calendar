@@ -50,7 +50,7 @@
 <!-- Adding perspective camera -->
 <T.PerspectiveCamera
   makeDefault
-  position={[4, 1, 5]}
+  position={[3, 3, 4.5]}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, 0)
   }}
@@ -59,8 +59,8 @@
   <OrbitControls
     enableDamping
     dampingFactor={0.01}
-    enableZoom={true}
-    enablePan={true}
+    enableZoom={false}
+    enablePan={false}
     rotateSpeed={0.25}
     minPolarAngle={Math.PI/3}
     maxPolarAngle={Math.PI/3}
