@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { T, useTask } from '@threlte/core'
   import { OrbitControls } from '@threlte/extras'
 
@@ -7,17 +7,55 @@
   useTask((delta) => {
     rotation += delta
   })
+
+  // programmatically setting up ring of spheres
+  const positions: [number, number, number][] = [
+    // quadrant one
+    [3, 0, 0],
+    [0.8, 2.9, 0],
+    [1.5, 2.6, 0],
+    [2.12, 2.12, 0],
+    [2.6, 1.5, 0],
+    [2.9, 0.8, 0],
+
+    // quadrant two
+    [0, 3, 0],
+    [0.8, -2.9, 0],
+    [1.5, -2.6, 0],
+    [2.12, -2.12, 0],
+    [2.6, -1.5, 0],
+    [2.9, -0.8, 0],
+
+    // quadrant three
+    [0, -3, 0],
+    [-0.8, -2.9, 0],
+    [-1.5, -2.6, 0],
+    [-2.12, -2.12, 0],
+    [-2.6, -1.5, 0],
+    [-2.9, -0.8, 0],
+
+    // quadrant four
+    [-3, 0, 0],
+    [-0.8, 2.9, 0],
+    [-1.5, 2.6, 0],
+    [-2.12, 2.12, 0],
+    [-2.6, 1.5, 0],
+    [-2.9, 0.8, 0],
+  ]
+
+  const sphereSize = 0.5
+  const sphereColor = '#ADB993'
 </script>
   
 <!-- Adding perspective camera -->
 <T.PerspectiveCamera
   makeDefault
-  position={[5, 5, 6]}
+  position={[3, 3, 4.5]}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, 0)
   }}
 >
-  <!-- Allows user to interact with toroid -->
+  <!-- Allows user to interact with ring of spheres -->
   <OrbitControls
     enableDamping
     dampingFactor={0.01}
@@ -36,14 +74,16 @@
 />
 <T.AmbientLight />
 
-<!-- One Moon toroid -->
-<T.Mesh
+<!-- One Moon ring of spheres -->
+<T.Group
   position.y={1.75}
   rotation.x={Math.PI/2}
   castShadow
 >
-  <T.TorusGeometry
-    args={[4, 1.15, 24, 24]}
-  />
-  <T.MeshStandardMaterial color="#ADB993" />
-</T.Mesh>
+  {#each positions as position}
+    <T.Mesh position={position}>
+      <T.SphereGeometry args={[sphereSize]} />
+      <T.MeshStandardMaterial color={sphereColor} />
+    </T.Mesh>
+  {/each}
+</T.Group>
