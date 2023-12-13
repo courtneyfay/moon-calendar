@@ -50,7 +50,7 @@
 <!-- Adding perspective camera -->
 <T.PerspectiveCamera
   makeDefault
-  position={[10, 1, 10]}
+  position={[4, 1, 5]}
   on:create={({ ref }) => {
     ref.lookAt(0, 0, 0)
   }}
