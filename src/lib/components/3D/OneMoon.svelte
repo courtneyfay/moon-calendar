@@ -29,106 +29,106 @@
     // quadrant one
     {
         position: [0, 3, 0],
-        eventTitle: generateSphereLabel('1 am'),
+        eventTitle: generateSphereLabel('11 am'),
     },
     {
         position: [0.8, 2.9, 0],
-        eventTitle: generateSphereLabel('2 am'),
+        eventTitle: generateSphereLabel('12 pm'),
     },
     {
         position: [1.5, 2.6, 0],
-        eventTitle: generateSphereLabel('3 am'), // todo: this should be 1pm or noon
+        eventTitle: generateSphereLabel('1 pm'),
     },
     {
         position: [2.12, 2.12, 0],
-        eventTitle: generateSphereLabel('4 am'),
+        eventTitle: generateSphereLabel('2 pm'),
     },
     {
         position: [2.6, 1.5, 0],
-        eventTitle: generateSphereLabel('5 am'),
+        eventTitle: generateSphereLabel('3 pm'),
     },
     {
         position: [2.9, 0.8, 0],
-        eventTitle: generateSphereLabel('6 am'),
+        eventTitle: generateSphereLabel('4 pm'),
     },
     
 
     // quadrant two
     {
         position: [3, 0, 0],
-        eventTitle: generateSphereLabel('7 am'),
+        eventTitle: generateSphereLabel('5 pm'),
     },
     {
         position: [2.9, -0.8, 0],
-        eventTitle: generateSphereLabel('8 am'),
+        eventTitle: generateSphereLabel('6 pm'),
     },
     {
         position: [2.6, -1.5, 0],
-        eventTitle: generateSphereLabel('9 am'),
+        eventTitle: generateSphereLabel('7 pm'),
     },
     {
         position: [2.12, -2.12, 0],
-        eventTitle: generateSphereLabel('10 am'),
+        eventTitle: generateSphereLabel('8 pm'),
     },
     {
         position: [1.5, -2.6, 0],
-        eventTitle: generateSphereLabel('11 am'),
+        eventTitle: generateSphereLabel('9 pm'),
     },
     {
         position: [0.8, -2.9, 0],
-        eventTitle: generateSphereLabel('12 pm'),
+        eventTitle: generateSphereLabel('10 pm'),
     },
 
     // quadrant three
     {
         position: [0, -3, 0],
-        eventTitle: generateSphereLabel('1 pm'),
+        eventTitle: generateSphereLabel('11 pm'),
     },
     {
         position: [-0.8, -2.9, 0],
-        eventTitle: generateSphereLabel('2 pm'),
+        eventTitle: generateSphereLabel('12 am'),
     },
     {
         position: [-1.5, -2.6, 0],
-        eventTitle: generateSphereLabel('3 pm'),
+        eventTitle: generateSphereLabel('1 am'),
     },
     {
         position: [-2.12, -2.12, 0],
-        eventTitle: generateSphereLabel('4 pm'),
+        eventTitle: generateSphereLabel('2 am'),
     },
     {
         position: [-2.6, -1.5, 0],
-        eventTitle: generateSphereLabel('5 pm'),
+        eventTitle: generateSphereLabel('3 am'),
     },
     {
         position: [-2.9, -0.8, 0],
-        eventTitle: generateSphereLabel('6 pm'),
+        eventTitle: generateSphereLabel('4 am'),
     },
 
     // quadrant four
     {
         position: [-3, 0, 0],
-        eventTitle: generateSphereLabel('7 pm'),
+        eventTitle: generateSphereLabel('5 am'),
     },
     {
         position: [-2.9, 0.8, 0],
-        eventTitle: generateSphereLabel('8 pm'),
+        eventTitle: generateSphereLabel('6 am'),
     },
     {
         position: [-2.6, 1.5, 0],
-        eventTitle: generateSphereLabel('9 pm'),
+        eventTitle: generateSphereLabel('7 am'),
     },
     {
         position: [-2.12, 2.12, 0],
-        eventTitle: generateSphereLabel('10 pm'),
+        eventTitle: generateSphereLabel('8 am'),
     },
     {
         position: [-1.5, 2.6, 0],
-        eventTitle: generateSphereLabel('11 pm'),
+        eventTitle: generateSphereLabel('9 am'),
     },
     {
         position: [-0.8, 2.9, 0],
-        eventTitle: generateSphereLabel('12 am'),
+        eventTitle: generateSphereLabel('10 am'),
     },
   ]
 
@@ -191,7 +191,7 @@
   <OrbitControls
     enableDamping
     dampingFactor={0.01}
-    enableZoom={true}
+    enableZoom={false}
     enablePan={false}
     rotateSpeed={0.25}
     minPolarAngle={Math.PI/3}
