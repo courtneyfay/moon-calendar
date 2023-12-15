@@ -2,7 +2,6 @@
   import { extend, T, useTask, useThrelte } from '@threlte/core'
   import { OrbitControls } from '@threlte/extras'
   import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js'
-  import { spheres } from '$lib/data/oneMoon'
 
   // animation
   let rotation = 0
@@ -12,6 +11,126 @@
 
   const sphereSize = 0.5
   const sphereColor = '#ADB993'
+
+  const generateSphereLabel = (labelText: string) => {
+    const text = document.createElement('div')
+    text.textContent = labelText
+    return text
+  }
+
+  type TSphere = {
+    position: [number, number, number],
+    eventTitle: HTMLDivElement,
+  }
+
+  // hardcoded ring of spheres
+  const spheres: TSphere[] = [
+    // todo: figure out how to programatically generate the positions (probably need to use radians/PI)
+    // quadrant one
+    {
+        position: [0, 3, 0],
+        eventTitle: generateSphereLabel('1 am'),
+    },
+    {
+        position: [0.8, 2.9, 0],
+        eventTitle: generateSphereLabel('2 am'),
+    },
+    {
+        position: [1.5, 2.6, 0],
+        eventTitle: generateSphereLabel('3 am'), // todo: this should be 1pm or noon
+    },
+    {
+        position: [2.12, 2.12, 0],
+        eventTitle: generateSphereLabel('4 am'),
+    },
+    {
+        position: [2.6, 1.5, 0],
+        eventTitle: generateSphereLabel('5 am'),
+    },
+    {
+        position: [2.9, 0.8, 0],
+        eventTitle: generateSphereLabel('6 am'),
+    },
+    
+
+    // quadrant two
+    {
+        position: [3, 0, 0],
+        eventTitle: generateSphereLabel('7 am'),
+    },
+    {
+        position: [2.9, -0.8, 0],
+        eventTitle: generateSphereLabel('8 am'),
+    },
+    {
+        position: [2.6, -1.5, 0],
+        eventTitle: generateSphereLabel('9 am'),
+    },
+    {
+        position: [2.12, -2.12, 0],
+        eventTitle: generateSphereLabel('10 am'),
+    },
+    {
+        position: [1.5, -2.6, 0],
+        eventTitle: generateSphereLabel('11 am'),
+    },
+    {
+        position: [0.8, -2.9, 0],
+        eventTitle: generateSphereLabel('12 pm'),
+    },
+
+    // quadrant three
+    {
+        position: [0, -3, 0],
+        eventTitle: generateSphereLabel('1 pm'),
+    },
+    {
+        position: [-0.8, -2.9, 0],
+        eventTitle: generateSphereLabel('2 pm'),
+    },
+    {
+        position: [-1.5, -2.6, 0],
+        eventTitle: generateSphereLabel('3 pm'),
+    },
+    {
+        position: [-2.12, -2.12, 0],
+        eventTitle: generateSphereLabel('4 pm'),
+    },
+    {
+        position: [-2.6, -1.5, 0],
+        eventTitle: generateSphereLabel('5 pm'),
+    },
+    {
+        position: [-2.9, -0.8, 0],
+        eventTitle: generateSphereLabel('6 pm'),
+    },
+
+    // quadrant four
+    {
+        position: [-3, 0, 0],
+        eventTitle: generateSphereLabel('7 pm'),
+    },
+    {
+        position: [-2.9, 0.8, 0],
+        eventTitle: generateSphereLabel('8 pm'),
+    },
+    {
+        position: [-2.6, 1.5, 0],
+        eventTitle: generateSphereLabel('9 pm'),
+    },
+    {
+        position: [-2.12, 2.12, 0],
+        eventTitle: generateSphereLabel('10 pm'),
+    },
+    {
+        position: [-1.5, 2.6, 0],
+        eventTitle: generateSphereLabel('11 pm'),
+    },
+    {
+        position: [-0.8, 2.9, 0],
+        eventTitle: generateSphereLabel('12 am'),
+    },
+  ]
 
   // getting event title labels to be near spheres
   
@@ -94,15 +213,12 @@
   castShadow
 >
   {#each spheres as sphere}
-    <!-- todo: replace text with sphere.eventTitle somehow -->
-    <!-- todo: figure out how to make each position unique, position={[-1, 2, 1]} -->
     <T.CSS2DObject
       args={[sphere.eventTitle]}
       position={sphere.position}
       center={[0, 0.5]}
     >
-    <!-- position={sphere.position} -->
-      <T.Mesh >
+      <T.Mesh>
         <T.SphereGeometry args={[sphereSize]} />
         <T.MeshStandardMaterial color={sphereColor} />
       </T.Mesh>
