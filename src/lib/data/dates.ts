@@ -15,6 +15,6 @@ export const newMoon = calculateDates(newMoons)
 export const astrologySigns = calculateDates(astrologyDates)
 export const seasons = calculateDates(seasonalDates)
 
-export const formatDate = (date: DateTime) => {
+export const formatDate = (date: DateTime): string => {
     return date.toFormat('MMMM dd, yyyy')
 }
