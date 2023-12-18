@@ -35,7 +35,7 @@
 
   const spheres: TSphere[] = oneMoonData.map(item => {
     const { id, position, time, event, link, color } = item
-    const eventTitle = `${time} - ${event}`
+    const eventTitle = Boolean(event) ? `${time} - ${event}` : `${time}`
 
     return {
       id,
@@ -91,20 +91,24 @@
   let boxLabel: HTMLDivElement
   const generateBoxLabel = (eventId: number) => {
     const wrapperDiv = document.createElement('div')
-    wrapperDiv.style.backgroundColor='hotpink'
+    wrapperDiv.style.backgroundColor = '#4E0250'
+    wrapperDiv.style.color = 'white'
     oneMoonData.forEach(data => {
-      if (eventId === data.id) {
-        const { time, event, link } = data
+      const { time, event, link } = data
+      if (eventId === data.id && Boolean(event)) {
         const timeDiv = document.createElement('div')
         timeDiv.textContent = `Time: ${time}`
         wrapperDiv.appendChild(timeDiv)
         const eventDiv = document.createElement('div')
         eventDiv.textContent = `Event: ${event}`
         wrapperDiv.appendChild(eventDiv)
-        const linkLink = document.createElement('a')
-        linkLink.href = link
-        linkLink.textContent = `Link: ${link}`
-        wrapperDiv.appendChild(linkLink)
+        if (Boolean(link)) {
+          const linkElement = document.createElement('a')
+          linkElement.href = link
+          linkElement.textContent = `Link: ${link}`
+          linkElement.style.color = 'white'
+          wrapperDiv.appendChild(linkElement)
+        }
       } 
     })
     return wrapperDiv
