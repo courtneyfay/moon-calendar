@@ -2,6 +2,14 @@
   import { extend, T, useTask, useThrelte } from '@threlte/core'
   import { OrbitControls } from '@threlte/extras'
   import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js'
+  import { interactivity } from '@threlte/extras'
+
+  import { oneMoonData } from '$lib/data/oneMoonData'
+  
+  // for ability to click on spheres and show details box
+  interactivity()
+  // show or hide the details box
+  let isVisible = false
 
   // animation
   let rotation = 0
@@ -18,189 +26,101 @@
   }
 
   type TSphere = {
-    position: [number, number, number],
-    eventTitle: HTMLDivElement,
-    sphereColor: string,
+    id: number
+    position: [number, number, number]
+    eventTitle: HTMLDivElement
+    link: string
+    color: string
   }
 
-  // hardcoded ring of spheres
-  const spheres: TSphere[] = [
-    // todo: figure out how to programatically generate the positions (probably need to use radians/PI)
-    // quadrant one
-    {
-        position: [0, 3, 0],
-        eventTitle: generateSphereLabel('11 am - Homework'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [0.8, 2.9, 0],
-        eventTitle: generateSphereLabel('12 pm - Workshop'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [1.5, 2.6, 0],
-        eventTitle: generateSphereLabel('1 pm - Workshop'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.12, 2.12, 0],
-        eventTitle: generateSphereLabel('2 pm - Homework'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.6, 1.5, 0],
-        eventTitle: generateSphereLabel('3 pm - Homework'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.9, 0.8, 0],
-        eventTitle: generateSphereLabel('4 pm - Homework'),
-        sphereColor: '#ADB993',
-    },
-    
+  const spheres: TSphere[] = oneMoonData.map(item => {
+    const { id, position, time, event, link, color } = item
+    const eventTitle = Boolean(event) ? `${time} - ${event}` : `${time}`
 
-    // quadrant two
-    {
-        position: [3, 0, 0],
-        eventTitle: generateSphereLabel('5 pm - Holiday Party'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.9, -0.8, 0],
-        eventTitle: generateSphereLabel('6 pm - Holiday Party'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.6, -1.5, 0],
-        eventTitle: generateSphereLabel('7 pm - Whim Time'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [2.12, -2.12, 0],
-        eventTitle: generateSphereLabel('8 pm - Whim Time'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [1.5, -2.6, 0],
-        eventTitle: generateSphereLabel('9 pm'),
-        sphereColor: 'white',
-    },
-    {
-        position: [0.8, -2.9, 0],
-        eventTitle: generateSphereLabel('10 pm'),
-        sphereColor: 'white',
-    },
-
-    // quadrant three
-    {
-        position: [0, -3, 0],
-        eventTitle: generateSphereLabel('11 pm'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-0.8, -2.9, 0],
-        eventTitle: generateSphereLabel('12 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-1.5, -2.6, 0],
-        eventTitle: generateSphereLabel('1 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-2.12, -2.12, 0],
-        eventTitle: generateSphereLabel('2 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-2.6, -1.5, 0],
-        eventTitle: generateSphereLabel('3 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-2.9, -0.8, 0],
-        eventTitle: generateSphereLabel('4 am'),
-        sphereColor: 'white',
-    },
-
-    // quadrant four
-    {
-        position: [-3, 0, 0],
-        eventTitle: generateSphereLabel('5 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-2.9, 0.8, 0],
-        eventTitle: generateSphereLabel('6 am - Recycling out'),
-        sphereColor: '#ADB993',
-    },
-    {
-        position: [-2.6, 1.5, 0],
-        eventTitle: generateSphereLabel('7 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-2.12, 2.12, 0],
-        eventTitle: generateSphereLabel('8 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-1.5, 2.6, 0],
-        eventTitle: generateSphereLabel('9 am'),
-        sphereColor: 'white',
-    },
-    {
-        position: [-0.8, 2.9, 0],
-        eventTitle: generateSphereLabel('10 am - Homework'),
-        sphereColor: '#ADB993',
-    },
-  ]
+    return {
+      id,
+      position,
+      eventTitle: generateSphereLabel(eventTitle),
+      color,
+      link,
+    }
+  })
 
   // getting event title labels to be near spheres
-  
-    const { scene, size, autoRenderTask, camera } = useThrelte()
-  
-    // Set up the CSS2DRenderer to run in a div placed atop the <Canvas>
-    const element = document.querySelector('#css-renderer-target') as HTMLElement
-    const cssRenderer = new CSS2DRenderer({ element })
-    $: cssRenderer.setSize($size.width, $size.height)
+  const { scene, size, autoRenderTask, camera } = useThrelte()
 
-    // test to see if it can work without separate file
-    extend({
-        CSS2DObject
-    });
-  
-    // We are running two renderers, and don't want to run
-    // updateMatrixWorld twice; tell the renderers that we'll handle
-    // it manually.
-    // https://threejs.org/docs/#api/en/core/Object3D.updateWorldMatrix
-    scene.matrixWorldAutoUpdate = false
-  
-    // To update the matrices *once* per frame, we'll use a task that is added
-    // right before the autoRenderTask. This way, we can be sure that the
-    // matrices are updated before the renderers run.
-    useTask(
-      () => {
-        scene.updateMatrixWorld()
-      },
-      { before: autoRenderTask }
-    )
-  
-    // The CSS2DRenderer needs to be updated after the autoRenderTask, so we
-    // add a task that runs after it.
-    useTask(
-      () => {
-        // Update the DOM
-        cssRenderer.render(scene, camera.current)
-      },
-      {
-        after: autoRenderTask,
-        autoInvalidate: false
-      }
-    )
+  // Set up the CSS2DRenderer to run in a div placed atop the <Canvas>
+  const element = document.querySelector('#css-renderer-target') as HTMLElement
+  const cssRenderer = new CSS2DRenderer({ element })
+  $: cssRenderer.setSize($size.width, $size.height)
 
-    const text = document.createElement('div')
-    text.textContent = 'Hello world!'
+  // test to see if it can work without separate file
+  extend({
+      CSS2DObject
+  });
+
+  // We are running two renderers, and don't want to run
+  // updateMatrixWorld twice; tell the renderers that we'll handle
+  // it manually.
+  // https://threejs.org/docs/#api/en/core/Object3D.updateWorldMatrix
+  scene.matrixWorldAutoUpdate = false
+
+  // To update the matrices *once* per frame, we'll use a task that is added
+  // right before the autoRenderTask. This way, we can be sure that the
+  // matrices are updated before the renderers run.
+  useTask(
+    () => {
+      scene.updateMatrixWorld()
+    },
+    { before: autoRenderTask }
+  )
+
+  // The CSS2DRenderer needs to be updated after the autoRenderTask, so we
+  // add a task that runs after it.
+  useTask(
+    () => {
+      // Update the DOM
+      cssRenderer.render(scene, camera.current)
+    },
+    {
+      after: autoRenderTask,
+      autoInvalidate: false
+    }
+  )
+
+  let boxLabel: HTMLDivElement
+  const generateBoxLabel = (eventId: number) => {
+    const wrapperDiv = document.createElement('div')
+    wrapperDiv.style.backgroundColor = '#4E0250'
+    wrapperDiv.style.color = 'white'
+    oneMoonData.forEach(data => {
+      const { time, event, link } = data
+      if (eventId === data.id && Boolean(event)) {
+        const timeDiv = document.createElement('div')
+        timeDiv.textContent = `Time: ${time}`
+        wrapperDiv.appendChild(timeDiv)
+        const eventDiv = document.createElement('div')
+        eventDiv.textContent = `Event: ${event}`
+        wrapperDiv.appendChild(eventDiv)
+        if (Boolean(link)) {
+          const linkElement = document.createElement('a')
+          linkElement.href = link
+          linkElement.textContent = `Link: ${link}`
+          linkElement.style.color = 'white'
+          wrapperDiv.appendChild(linkElement)
+        }
+      } 
+    })
+    return wrapperDiv
+  }
+
+  const handleEnter = (eventId: number) => {
+    boxLabel = generateBoxLabel(eventId)
+    isVisible = !isVisible
+  }
+  const handleLeave = () => {
+    isVisible = !isVisible
+  }
 </script>
   
 <!-- Adding perspective camera -->
@@ -242,10 +162,20 @@
       position={sphere.position}
       center={[0, 0.5]}
     >
-      <T.Mesh>
+      <T.Mesh
+        on:pointerenter={() => handleEnter(sphere.id)}
+        on:pointerleave={handleLeave}
+      >
         <T.SphereGeometry args={[sphereSize]} />
-        <T.MeshStandardMaterial color={sphere.sphereColor} />
+        <T.MeshStandardMaterial color={sphere.color} />
       </T.Mesh>
     </T.CSS2DObject>
   {/each}
 </T.Group>
+
+<!-- text for details of time -->
+<T.CSS2DObject
+  args={[boxLabel]}
+  center={[0.1, 5]}
+  visible={isVisible}
+/>
