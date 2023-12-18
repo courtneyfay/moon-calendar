@@ -7,25 +7,7 @@ export type TOneMoon = {
     color: string
 }
 
-// hardcoded ring of spheres
-  // const spheres: TSphere[] = [
-  //   
-  //   // quadrant one
-  //   {
-  //       position: [0, 3, 0],
-  //       eventTitle: generateSphereLabel('11 am - Homework'),
-  //       sphereColor: '#ADB993',
-  //   },
-  //   {
-  //       position: [0.8, 2.9, 0],
-  //       eventTitle: generateSphereLabel('12 pm - Workshop'),
-  //       sphereColor: '#ADB993',
-  //   },
-  //   {
-  //       position: [1.5, 2.6, 0],
-  //       eventTitle: generateSphereLabel('1 pm - Workshop'),
-  //       sphereColor: '#ADB993',
-  //   },
+
   //   {
   //       position: [2.12, 2.12, 0],
   //       eventTitle: generateSphereLabel('2 pm - Homework'),
@@ -141,17 +123,35 @@ export type TOneMoon = {
   // ]
 
 const HOMEWORK = 'Homework'
+const WORKSHOP = 'Workshop'
 const chooseColor = (eventValue: string) => {
     return eventValue ? '#ADB993' : ''
 }
 // todo: figure out how to programatically generate the positions (probably need to use radians/PI)
 export const oneMoonData: TOneMoon[] = [
+    // quadrant one
     {
         id: 1,
         position: [0, 3, 0],
         time: '11 am',
         event: HOMEWORK,
-        link: 'https://www.google.com',
+        link: 'https://www.homework.com',
         color: chooseColor(HOMEWORK),
+    },
+    {
+        id: 2,
+        position: [0.8, 2.9, 0],
+        time: '12 pm',
+        event: WORKSHOP,
+        link: 'https://www.workshop.com',
+        color: chooseColor(WORKSHOP),
+    },
+    {
+        id: 3,
+        position: [1.5, 2.6, 0],
+        time: '1 pm', 
+        event: 'Workshop',
+        link: 'https://www.workshop.com',
+        color: chooseColor(WORKSHOP),
     },
 ]

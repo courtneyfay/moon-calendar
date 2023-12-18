@@ -6,8 +6,10 @@
 
   import { oneMoonData } from '$lib/data/oneMoonData'
   
-  // for interactivity of spheres
+  // for ability to click on spheres and show details box
   interactivity()
+  // show or hide the details box
+  let isVisible = false
 
   // animation
   let rotation = 0
@@ -17,7 +19,7 @@
 
   const sphereSize = 0.5
 
-  const generateTextLabel = (labelText: string) => {
+  const generateSphereLabel = (labelText: string) => {
     const text = document.createElement('div')
     text.textContent = labelText
     return text
@@ -38,14 +40,11 @@
     return {
       id,
       position,
-      eventTitle: generateTextLabel(eventTitle),
+      eventTitle: generateSphereLabel(eventTitle),
       color,
       link,
     }
   })
-
-  // show or hide the details box
-  let isVisible = false
 
   // getting event title labels to be near spheres
   const { scene, size, autoRenderTask, camera } = useThrelte()
@@ -89,8 +88,33 @@
     }
   )
 
-  const handleClick = (thingy: number) => {
-    console.log('hitting handleClick - ', thingy)
+  let boxLabel: HTMLDivElement
+  const generateBoxLabel = (eventId: number) => {
+    const wrapperDiv = document.createElement('div')
+    wrapperDiv.style.backgroundColor='hotpink'
+    oneMoonData.forEach(data => {
+      if (eventId === data.id) {
+        const { time, event, link } = data
+        const timeDiv = document.createElement('div')
+        timeDiv.textContent = `Time: ${time}`
+        wrapperDiv.appendChild(timeDiv)
+        const eventDiv = document.createElement('div')
+        eventDiv.textContent = `Event: ${event}`
+        wrapperDiv.appendChild(eventDiv)
+        const linkLink = document.createElement('a')
+        linkLink.href = link
+        linkLink.textContent = `Link: ${link}`
+        wrapperDiv.appendChild(linkLink)
+      } 
+    })
+    return wrapperDiv
+  }
+
+  const handleEnter = (eventId: number) => {
+    boxLabel = generateBoxLabel(eventId)
+    isVisible = !isVisible
+  }
+  const handleLeave = () => {
     isVisible = !isVisible
   }
 </script>
@@ -135,7 +159,8 @@
       center={[0, 0.5]}
     >
       <T.Mesh
-        on:click={() => handleClick(sphere.id)}
+        on:pointerenter={() => handleEnter(sphere.id)}
+        on:pointerleave={handleLeave}
       >
         <T.SphereGeometry args={[sphereSize]} />
         <T.MeshStandardMaterial color={sphere.color} />
@@ -144,19 +169,9 @@
   {/each}
 </T.Group>
 
+<!-- text for details of time -->
 <T.CSS2DObject
-  args={[generateTextLabel('hihihi how are you doing this fine evening')]}
+  args={[boxLabel]}
   center={[0.1, 5]}
   visible={isVisible}
->
-  <T.Mesh
-    position.y={1}
-    position.x={1}
-    rotation.y={90}
-  >
-    <T.BoxGeometry
-      args={[0.1, 2, 2]}
-    />
-    <T.MeshStandardMaterial color='hotpink' />
-  </T.Mesh>
-</T.CSS2DObject>
+/>
