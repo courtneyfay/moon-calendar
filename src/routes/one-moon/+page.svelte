@@ -15,6 +15,11 @@
         { formatDate(today) }
     </div>
     <SceneWrapper />
+{:catch error}
+    <p>Something went wrong: { error.message }</p>
+    {#each Object.keys(error) as key}
+        <p>Key: {key}</p>
+    {/each}
 {/await}
 
 <style>
